@@ -1,0 +1,44 @@
+.navbar-brand {
+    color: $primary;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.avatar {
+    width: 35px;
+    height: 35px;
+}
+
+.subscribed-avatar {
+    width: 120px;
+    height: 120px;
+}
+
+.avatar-video {
+    width: 80px;
+    height: 80px;
+    background-size: cover;
+}
+
+.avatar-comment {
+    width: 40px;
+    height: 40px;
+}
+
+@media only screen and (max-width: 800px) {
+    .subscribed-avatar {
+        width: 80px;
+        height: 80px;
+    }
+    .avatar-video {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .subscribed-avatar {
+        width: 100px;
+        height: 100px;
+    }
+}
