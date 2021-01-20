@@ -23,6 +23,6 @@
         "sass-loader": "^8.0.0"
     },
     "engines": {
-        "node": "12.x"
+        "node": "12.14.0"
       }
 }
