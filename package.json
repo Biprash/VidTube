@@ -1,7 +1,6 @@
 {
     "private": true,
     "scripts": {
-        "postinstall": "npm run prod",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
@@ -24,5 +23,5 @@
     },
     "engines": {
         "node": "12.14.0"
-      }
+    }
 }
