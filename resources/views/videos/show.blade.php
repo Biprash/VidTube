@@ -21,16 +21,25 @@
                 <div class="ml-auto d-flex">
                     <div class="border-bottom border-info d-flex">
                         <div class="px-1">
-                            <img src="{{ asset('svg/thumb_up.svg') }}" alt="" class="px-1">
+                            {{-- <img src="{{ asset('svg/thumb_up.svg') }}" style="color: white" alt="" class="px-1"> --}}
+                                <span class="px-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/></svg>
+                                </span>
                             <span>12K</span>
                         </div>
                         <div class="px-1">
-                            <img src="{{ asset('svg/thumb_down.svg') }}" alt="" class="px-1">
+                            {{-- <img src="{{ asset('svg/thumb_down.svg') }}" alt="" class="px-1"> --}}
+                            <span class="px-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.8V13c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V6.34C17 5.05 15.95 4 14.66 4h-8.1c-.71 0-1.36.37-1.72.97l-2.67 6.15z"/></svg>
+                            </span>
                             <span>2K</span>
                         </div>
                     </div>
                     <div class="px-1">
-                        <img src="{{ asset('svg/share.svg') }}" alt="" class="px-1">
+                        {{-- <img src="{{ asset('svg/share.svg') }}" alt="" class="px-1"> --}}
+                        <span class="px-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/></svg>
+                        </span>
                         <span>Share</span>
                     </div>
                 </div>
@@ -42,13 +51,13 @@
                 </div>
                 <div class="col-7 col-md-7 col-lg-8">
                     <h5><a href="{{route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></h5>
-                    <span class="text-muted">12M Subscriber</span>
+                    <span class="text-muted">{{ $subscriber_count }} Subscriber</span>
                 </div>
                 <div class="col-3 col-md-3 col-lg-2">
                     <form action="/subscribe/store/{{ $video->id }}" method="post">
                         @csrf
                         <input type="hidden" name="like" value="like">
-                            @if (!$like)            
+                            @if (!$subscribe_status)             
                             <input type="submit" value="Subscribe" class="btn btn-primary w-100 text-white">
                             @else
                             <input type="submit" value="Unsubscribe" class="btn btn-info w-100">            
@@ -65,8 +74,27 @@
             </div>
 
             <h4 class="py-2">Comments</h4>
+            <form action="{{route('comment.store', ['id' => $video->id])}}" method="post" class="inline-form">
+                @csrf
+                <div class="form-group row">
+                    <div class="col-9">
+                        <input type="text" name="content" placeholder="Add a comment" class="form-control border-0">
+                    </div>
+                    <input type="submit" value="Comment" class="btn btn-primary text-white col-3">
+                </div>
+            </form>
+            <br>
             <ul class="list-unstyled">
-                <li class="media">
+                @foreach ($comments as $comment)
+                <li class="media my-2">
+                    <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" class="mr-3 avatar-comment rounded-circle" alt="...">
+                    <div class="media-body">
+                    <h6 class="mt-0 mb-1 font-weight-bold">{{ $comment->user->name }}</h6>
+                    <p>{{ $comment->content }}</p>
+                  </div>
+                </li>
+                @endforeach
+                {{-- <li class="media">
                     <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" class="mr-3 avatar-comment rounded-circle" alt="...">
                     <div class="media-body">
                     <h6 class="mt-0 mb-1">List-based media object</h6>
@@ -86,7 +114,7 @@
                     <h6 class="mt-0 mb-1">List-based media object</h6>
                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla.
                   </div>
-                </li>
+                </li> --}}
               </ul>
         </div>
         <div class="col-md-12 col-lg-4">

@@ -25,6 +25,18 @@
     height: 40px;
 }
 
+svg > path {
+    fill: white;
+}
+
+svg:hover > path {
+    fill: $primary;
+}
+
+.active-svg > svg > path {
+    fill: $primary;
+}
+
 @media only screen and (max-width: 800px) {
     .subscribed-avatar {
         width: 80px;

@@ -10,7 +10,7 @@
         </div>
         <div class="col col-md-6 col-lg-8">
             <h4>{{$channel->name}}</h4>
-            <span class="text-muted">{{ $subscriber_count }}</span>
+            <span class="text-muted">{{ $subscriber_count }} Subscriber</span>
         </div>
         <div class="col col-md-3 col-lg-2">
             <form action="/subscribe/store/{{ $channel->id }}" method="post">
@@ -32,9 +32,9 @@
     <div class="row mt-3">
 
         @foreach ($videos as $video)
-        <div class="col col-md-4 col-lg-3 d-flex flex-column">
+        <div class="col-6 col-md-4 col-lg-3 d-flex flex-column">
             <a href="{{route('video.show', ['id' => $video->id])}}">
-                <img src="{{ asset('storage/'.$video->thumbnail) }}" alt="" class="img-fluid">
+                <img src="{{ asset('storage/'.$video->thumbnail) }}" style="height: 155px; width:100%;" alt="" class="img-fluid">
              </a>
             <div class="row py-3">
                 <div class="col-12 d-flex flex-column">

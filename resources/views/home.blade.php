@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row">
         @foreach ($videos as $video)
-        <div class="col col-md-4 col-lg-3 d-flex flex-column">
+        <div class="col-6 col-md-4 col-lg-3 d-flex flex-column">
             <a href="{{route('video.show', ['id' => $video->id])}}">
-               <img src="{{ asset('storage/'.$video->thumbnail) }}" alt="" class="img-fluid">
+               <img src="{{ asset('storage/'.$video->thumbnail) }}" alt=""  style="height: 155px;  width:100%;" class="img-fluid">
             </a>
             <div class="row py-3">
                 <div class="col-2">

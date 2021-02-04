@@ -85,7 +85,19 @@ class VideoController extends Controller
         //
         $user = $request->user();
         $video = Video::findOrFail($video_id);
+        $channel = $video->user;
+        $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
+        $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
+        $subscribe = $subscribe->first();
         $comments = $video->comments;
+        if($subscribe == null) 
+        {
+            $subscribe_status =null;
+        }
+        else {
+            $subscribe_status = $subscribe->status;
+        }
+
         if ($user->id) {
             $like = $video->likes()->where('user_id', $user->id)->first();
             if ($like) {
@@ -97,7 +109,13 @@ class VideoController extends Controller
         else {
             $like = null;
         }
-        return view('videos.show', ['video' => $video, 'comments' => $comments, 'like' => $like]);
+        $content = ['video' => $video,
+            'comments' => $comments, 
+            'like' => $like,
+            'subscribe_status' => $subscribe_status, 
+            'subscriber_count' => $subscriber_count
+        ];
+        return view('videos.show', $content);
     }
 
     /**
