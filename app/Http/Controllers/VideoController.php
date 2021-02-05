@@ -89,6 +89,9 @@ class VideoController extends Controller
         $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
         $subscribe = $subscribe->first();
+        $like_count = $video->likes()->where('status', true)->count();
+        $unlike_count = $video->likes()->where('status', false)->count();
+        // dd($like_count, $unlike_count);
         $comments = $video->comments;
         if($subscribe == null) 
         {
@@ -112,6 +115,8 @@ class VideoController extends Controller
         $content = ['video' => $video,
             'comments' => $comments, 
             'like' => $like,
+            'like_count' => $like_count,
+            'unlike_count' => $unlike_count,
             'subscribe_status' => $subscribe_status, 
             'subscriber_count' => $subscriber_count
         ];
