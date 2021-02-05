@@ -38,10 +38,10 @@ Route::middleware(['auth', 'authorized_user'])->prefix('video')->name('video.')-
 });
 
 
-Route::prefix('comment')->name('comment.')->group(function () {
-    Route::post('/store/{id}', [CommentController::class, 'store'])->middleware('auth')->name('store');
-    Route::put('/update/{id}', [CommentController::class, 'update'])->middleware('auth')->name('update');
-    Route::delete('/destroy/{id}', [CommentController::class, 'destroy'])->middleware('auth')->name('destroy');
+Route::middleware('auth')->prefix('comment')->name('comment.')->group(function () {
+    Route::post('/store/{id}', [CommentController::class, 'store'])->name('store');
+    Route::put('/update/{id}', [CommentController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [CommentController::class, 'destroy'])->name('destroy');
 });
 
 Route::post('/like/store/{id}', [LikeController::class, 'store'])->middleware('auth');

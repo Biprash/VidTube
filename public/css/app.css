@@ -10010,6 +10010,12 @@ svg:hover > path {
   fill: #ffa500;
 }
 
+.btn-transparent {
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+
 @media only screen and (max-width: 800px) {
   .subscribed-avatar {
     width: 80px;

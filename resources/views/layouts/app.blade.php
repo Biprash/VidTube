@@ -9,6 +9,14 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    {{-- Favicon --}}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('images/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/512.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/192.png') }}">
+    <link rel="icon" href="{{ asset('images/favicon.ico') }}"/>
+    {{-- <link rel="manifest" href="/site.webmanifest"> --}}
+    <link rel="manifest" href="{{ asset('images/site.webmanifest') }}">
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

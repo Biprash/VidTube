@@ -99,7 +99,7 @@ class VideoController extends Controller
         }
 
         if ($user->id) {
-            $like = $video->likes()->where('user_id', $user->id)->first();
+            $like = $video->likes()->where([['user_id', '=', $user->id], ['video_id', '=', $video_id]])->first();
             if ($like) {
                 $like = $like->status;
             } else {
