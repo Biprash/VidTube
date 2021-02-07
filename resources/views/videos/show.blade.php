@@ -68,11 +68,11 @@
                 <div class="col-2 col-md-2 col-lg-2">
                     <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" alt="" class="img-fluid avatar-video rounded-circle">
                 </div>
-                <div class="col-7 col-md-7 col-lg-8">
+                <div class="col-6 col-md-7 col-lg-8">
                     <h5><a href="{{route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></h5>
                     <span class="text-muted">{{ $subscriber_count }} Subscriber</span>
                 </div>
-                <div class="col-3 col-md-3 col-lg-2">
+                <div class="col-4 col-md-3 col-lg-2">
                     <form action="/subscribe/store/{{ $video->id }}" method="post">
                         @csrf
                         <input type="hidden" name="like" value="like">
@@ -137,13 +137,20 @@
               </ul>
         </div>
         <div class="col-md-12 col-lg-4">
+            @foreach ($recommended as $video)
             <div class="row mb-3">
                 <div class="col-4 col-sm-4 col-md-3 col-lg-5">
-                    <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" alt="" class="img-fluid">
+                    <a href="{{ route('video.show', ['id' => $video->id]) }}">
+                        <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="" class="img-fluid">
+                    </a>
                 </div>
                 <div class="col-8 col-sm-8 col-md-9 col-lg-7">
-                    <h5 class="mb-1 text-truncate">The way to wisdom on the buddha's boat by Rabindra nath Baidya</h5>
-                    <p class="m-0 text-info">Aniplex</p>
+                    <a href="{{ route('video.show', ['id' => $video->id]) }}">
+                        <h5 class="mb-1 text-truncate">{{ $video->title }}</h5>
+                    </a>
+                    <a href="{{route('video.index', ['id' => $video->user->id]) }}">
+                        <p class="m-0 text-info">{{ $video->user->name}}</p>
+                    </a>
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
@@ -151,6 +158,7 @@
                     </div>
                 </div>
             </div>
+            @endforeach
         </div>
     </div>
 </div>

@@ -91,6 +91,7 @@ class VideoController extends Controller
         $subscribe = $subscribe->first();
         $like_count = $video->likes()->where('status', true)->count();
         $unlike_count = $video->likes()->where('status', false)->count();
+        $recommended = Video::whereNotIn('id', [$video_id])->limit(5)->get();
         // dd($like_count, $unlike_count);
         $comments = $video->comments;
         if($subscribe == null) 
@@ -112,13 +113,15 @@ class VideoController extends Controller
         else {
             $like = null;
         }
-        $content = ['video' => $video,
+        $content = [
+            'video' => $video,
             'comments' => $comments, 
             'like' => $like,
             'like_count' => $like_count,
             'unlike_count' => $unlike_count,
             'subscribe_status' => $subscribe_status, 
-            'subscriber_count' => $subscriber_count
+            'subscriber_count' => $subscriber_count,
+            'recommended' => $recommended
         ];
         return view('videos.show', $content);
     }
