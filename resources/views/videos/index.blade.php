@@ -6,7 +6,7 @@
     <div class="container">
     <div class="row align-items-center">
         <div class="col col-md-3 col-lg-2 py-3">
-            <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" alt="" class="img-fluid subscribed-avatar rounded-circle">
+            <img src="{{ asset('storage/'.$channel->image) }}" alt="" class="img-fluid subscribed-avatar rounded-circle">
         </div>
         <div class="col col-md-6 col-lg-8">
             <h4>{{$channel->name}}</h4>
@@ -42,7 +42,7 @@
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
-                        <span>2 days ago</span>
+                        <span>{{ $video->created_at }}</span>
                     </div>
                 </div>
             </div>

@@ -15,7 +15,7 @@
                 <div class="mr-auto pb-2">
                     <span>12M views</span>
                     <span class="font-weight-bolder">.</span>
-                    <span>3 months ago</span>
+                    <span>{{ $video->created_at }}</span>
                 </div>
                 <div class="ml-auto d-flex">
                     <div class="border-bottom border-info d-flex">
@@ -66,7 +66,7 @@
 
             <div class="row my-3 align-items-center">
                 <div class="col-2 col-md-2 col-lg-2">
-                    <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" alt="" class="img-fluid avatar-video rounded-circle">
+                    <img src="{{ asset('storage/'.$video->user->image) }}" alt="" class="img-fluid avatar-video rounded-circle">
                 </div>
                 <div class="col-6 col-md-7 col-lg-8">
                     <h5><a href="{{route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></h5>

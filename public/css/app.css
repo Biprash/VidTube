@@ -10016,6 +10016,40 @@ svg:hover > path {
   outline: none;
 }
 
+.admin-main {
+  margin-left: 220px;
+}
+
+.sidebar {
+  height: 100%;
+  width: 220px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #ffffff;
+  display: block;
+  padding: 8px 8px 8px 16px;
+}
+
+.sidebar a:hover {
+  color: #ffa500;
+  background-color: #808080;
+}
+
+.thumbnail-table {
+  max-width: 150px;
+  max-height: 85px;
+  background-size: cover;
+  width: 100%;
+}
+
 @media only screen and (max-width: 800px) {
   .subscribed-avatar {
     width: 80px;

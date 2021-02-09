@@ -1,10 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +26,9 @@ use App\Http\Controllers\SubscribeController;
 // });
 
 Auth::routes();
+
+Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change.password');
+Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password.store');
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -46,3 +53,13 @@ Route::middleware('auth')->prefix('comment')->name('comment.')->group(function (
 
 Route::post('/like/store/{id}', [LikeController::class, 'store'])->middleware('auth');
 Route::post('/subscribe/store/{id}', [SubscribeController::class, 'store'])->middleware('auth');
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('dashboard');
+    Route::get('/channel', [ChannelController::class, 'index'])->name('channel');
+});
+
+Route::prefix('profile')->name('profile.')->group(function () {
+    Route::get('/', [ProfileController::class, 'show'])->name('show');
+    Route::put('/update/{user}', [ProfileController::class, 'update'])->name('update');
+});

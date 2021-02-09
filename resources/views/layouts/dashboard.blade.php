@@ -29,14 +29,18 @@
 </head>
 <body>
     <div id="app">
-        @include('layouts.navbar')
-        @if (session('message'))
-            <div class="alert alert-success py-2">
-                {{ session('message') }}
+        @include('layouts.sidebar')
+        <main class="admin-main">
+            @include('layouts.navbar')
+            <div class="p-3">
+                @if (session('message'))
+                    <div class="alert alert-success py-2">
+                        {{ session('message') }}
+                    </div>
+                @endif
+
+                @yield('content')
             </div>
-        @endif
-        <main class="py-4">
-            @yield('content')
         </main>
     </div>
 </body>

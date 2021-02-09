@@ -11,7 +11,7 @@
             <div class="row py-3">
                 <div class="col-2">
                     <a href="{{route('video.index', ['id' => $video->user->id]) }}">
-                        <img src="https://th.bing.com/th/id/OIP.EaTug7E3jcaapFVnI3ccIQHaEK?pid=Api&rs=1" alt="" class="avatar rounded-circle">
+                        <img src="{{ asset('storage/'.$video->user->image) }}" alt="" class="avatar rounded-circle">
                     </a>
                 </div>
                 <div class="col-10 d-flex flex-column">
@@ -20,7 +20,8 @@
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
-                        <span>2 days ago</span>
+                        {{-- <span>2 days ago</span> --}}
+                        <span>{{ $video->created_at }}</span>
                     </div>
                 </div>
             </div>

@@ -52,7 +52,7 @@
                         </div>
                     </li> --}}
                     <li class="nav-item mr-2">
-                        <a class="nav-link" href="#">{{ Auth::user()->name }}</a>
+                        <a class="nav-link" href="{{ route('admin.dashboard') }}">{{ Auth::user()->name }}</a>
                     </li>
                     <li class="nav-item mr-2">
                         <a class="btn btn-primary text-white" href="{{ route('video.create') }}">Upload</a>
