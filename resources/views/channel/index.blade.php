@@ -17,7 +17,7 @@
                     <td>
                         <img src="{{ asset('storage/'.$video->thumbnail) }}" class="img-fluid thumbnail-table" alt="">
                     </td>
-                    <td><a href="{{ route('video.show', ['id' => $video->id]) }}">{{ $video->title }}</a></td>
+                    <td><a href="{{ route('video.show', $video) }}">{{ $video->title }}</a></td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('video.edit', ['id' => $video->id]) }}" class="btn btn-warning mr-2">Edit</a>
                         <form action="{{ route('video.destroy', ['id' => $video->id]) }}" method="POST">

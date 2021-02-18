@@ -21,7 +21,7 @@ class ProfileController extends Controller
     public function update(Request $request, User $user)
     {
         if($request->user() == $user) {
-            $user->image = $request->file('profile_pic')->store('image');
+            $user->image = $request->file('profile_pic')->store('profile_pic');
             $user->save();
             return redirect()->back()->with('message', 'Profile picture has been updated.');
         } else {

@@ -5,7 +5,7 @@
     <div class="row">
         @foreach ($videos as $video)
         <div class="col-6 col-md-4 col-lg-3 d-flex flex-column">
-            <a href="{{route('video.show', ['id' => $video->id])}}">
+            <a href="{{ route('video.show', $video) }}">
                <img src="{{ asset('storage/'.$video->thumbnail) }}" alt=""  style="height: 155px;  width:100%;" class="img-fluid">
             </a>
             <div class="row py-3">
@@ -15,8 +15,8 @@
                     </a>
                 </div>
                 <div class="col-10 d-flex flex-column">
-                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{route('video.show', ['id' => $video->id])}}">{{ $video->title }}</a></h6>
-                    <p class="m-0 text-info"><a href="{{route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></p>
+                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}">{{ $video->title }}</a></h6>
+                    <p class="m-0 text-info"><a href="{{ route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></p>
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>

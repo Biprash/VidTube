@@ -80,20 +80,33 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $video_id)
+    public function show(Request $request, Video $video)
     {
         //
-        $user = $request->user();
-        $video = Video::findOrFail($video_id);
         $channel = $video->user;
-        $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
-        $subscribe = $subscribe->first();
         $like_count = $video->likes()->where('status', true)->count();
         $unlike_count = $video->likes()->where('status', false)->count();
-        $recommended = Video::whereNotIn('id', [$video_id])->limit(5)->get();
-        // dd($like_count, $unlike_count);
+        $recommended = Video::whereNotIn('id', [$video->id])->limit(5)->get();
         $comments = $video->comments;
+
+        if($request->user() === null) {
+
+            $content = [
+                'video' => $video,
+                'comments' => $comments, 
+                'like_count' => $like_count,
+                'unlike_count' => $unlike_count,
+                'subscriber_count' => $subscriber_count,
+                'recommended' => $recommended
+            ];
+            return view('videos.show', $content);
+        }
+
+        // else
+        $user = $request->user();
+        $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
+        $subscribe = $subscribe->first();
         if($subscribe == null) 
         {
             $subscribe_status =null;
@@ -102,17 +115,13 @@ class VideoController extends Controller
             $subscribe_status = $subscribe->status;
         }
 
-        if ($user->id) {
-            $like = $video->likes()->where([['user_id', '=', $user->id], ['video_id', '=', $video_id]])->first();
-            if ($like) {
-                $like = $like->status;
-            } else {
-                $like = null;
-            }
-        }
-        else {
+        $like = $video->likes()->where([['user_id', '=', $user->id], ['video_id', '=', $video->id]])->first();
+        if ($like) {
+            $like = $like->status;
+        } else {
             $like = null;
         }
+        
         $content = [
             'video' => $video,
             'comments' => $comments, 

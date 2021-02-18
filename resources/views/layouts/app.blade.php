@@ -31,7 +31,7 @@
     <div id="app">
         @include('layouts.navbar')
         @if (session('message'))
-            <div class="alert alert-success py-2">
+            <div class=" container alert alert-success my-2">
                 {{ session('message') }}
             </div>
         @endif

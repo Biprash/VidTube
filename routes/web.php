@@ -38,7 +38,7 @@ Route::middleware(['auth', 'authorized_user'])->prefix('video')->name('video.')-
     Route::get('/channel/{id}', [VideoController::class, 'index'])->withoutMiddleware(['authorized_user'])->name('index');
     Route::get('/create', [VideoController::class, 'create'])->withoutMiddleware(['authorized_user'])->name('create');
     Route::post('/store', [VideoController::class, 'store'])->withoutMiddleware(['authorized_user'])->name('store');
-    Route::get('/{id}/show', [VideoController::class, 'show'])->withoutMiddleware(['authorized_user'])->name('show');
+    Route::get('/{video}/show', [VideoController::class, 'show'])->withoutMiddleware(['authorized_user','auth'])->name('show');
     Route::get('/{id}/edit', [VideoController::class, 'edit'])->name('edit');
     Route::put('/{id}/update', [VideoController::class, 'update'])->name('update');
     Route::delete('/{id}/destroy', [VideoController::class, 'destroy'])->name('destroy');
@@ -63,3 +63,6 @@ Route::prefix('profile')->name('profile.')->group(function () {
     Route::get('/', [ProfileController::class, 'show'])->name('show');
     Route::put('/update/{user}', [ProfileController::class, 'update'])->name('update');
 });
+
+// grouping properly
+// Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){});

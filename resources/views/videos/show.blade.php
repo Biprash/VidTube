@@ -26,7 +26,8 @@
                                     @csrf
                                     <input type="hidden" name="like" value="like">  
                                         <button type="submit" class="btn-transparent">
-                                            <span class="px-1 @if ($like  === true) active-svg @endif">
+                                            <span class="px-1 @if (!empty($like)) @if ($like  === false)                                            
+                                            active-svg @endif @endif">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M2 20h2c.55 0 1-.45 1-1v-9c0-.55-.45-1-1-1H2v11zm19.83-7.12c.11-.25.17-.52.17-.8V11c0-1.1-.9-2-2-2h-5.5l.92-4.65c.05-.22.02-.46-.08-.66-.23-.45-.52-.86-.88-1.22L14 2 7.59 8.41C7.21 8.79 7 9.3 7 9.83v7.84C7 18.95 8.05 20 9.34 20h8.11c.7 0 1.36-.37 1.72-.97l2.66-6.15z"/></svg>
                                             </span>
                                         </button>
@@ -46,7 +47,8 @@
                                 @csrf
                                 <input type="hidden" name="like" value="unlike">  
                                     <button type="submit" class="btn-transparent">
-                                        <span class="px-1 @if ($like  === false) active-svg @endif">
+                                        <span class="px-1 @if (!empty($like)) @if ($like  === false)                                            
+                                        active-svg @endif @endif">
                                             <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24"><path d="M22 4h-2c-.55 0-1 .45-1 1v9c0 .55.45 1 1 1h2V4zM2.17 11.12c-.11.25-.17.52-.17.8V13c0 1.1.9 2 2 2h5.5l-.92 4.65c-.05.22-.02.46.08.66.23.45.52.86.88 1.22L10 22l6.41-6.41c.38-.38.59-.89.59-1.42V6.34C17 5.05 15.95 4 14.66 4h-8.1c-.71 0-1.36.37-1.72.97l-2.67 6.15z"/></svg>
                                         </span>
                                     </button>
@@ -76,11 +78,16 @@
                     <form action="/subscribe/store/{{ $video->id }}" method="post">
                         @csrf
                         <input type="hidden" name="like" value="like">
+                        @if (empty($subscribe_status))
+                            <input type="submit" value="Subscribe" class="btn btn-primary w-100 text-white">
+                        @else
                             @if (!$subscribe_status)             
                             <input type="submit" value="Subscribe" class="btn btn-primary w-100 text-white">
                             @else
                             <input type="submit" value="Unsubscribe" class="btn btn-info w-100">            
-                            @endif     
+                            @endif  
+                            
+                        @endif   
                     </form>
                 </div>
             </div>
@@ -140,12 +147,12 @@
             @foreach ($recommended as $video)
             <div class="row mb-3">
                 <div class="col-4 col-sm-4 col-md-3 col-lg-5">
-                    <a href="{{ route('video.show', ['id' => $video->id]) }}">
+                    <a href="{{ route('video.show', $video) }}">
                         <img src="{{ asset('storage/' . $video->thumbnail) }}" alt="" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-8 col-sm-8 col-md-9 col-lg-7">
-                    <a href="{{ route('video.show', ['id' => $video->id]) }}">
+                    <a href="{{ route('video.show', $video) }}">
                         <h5 class="mb-1 text-truncate">{{ $video->title }}</h5>
                     </a>
                     <a href="{{route('video.index', ['id' => $video->user->id]) }}">
