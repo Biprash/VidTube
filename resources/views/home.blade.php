@@ -15,8 +15,8 @@
                     </a>
                 </div>
                 <div class="col-10 d-flex flex-column">
-                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}">{{ $video->title }}</a></h6>
-                    <p class="m-0 text-info"><a href="{{ route('video.index', ['id' => $video->user->id]) }}">{{ $video->user->name }}</a></p>
+                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></h6>
+                    <p class="m-0 text-info"><a href="{{ route('video.index', ['id' => $video->user->id]) }}" class="text-decoration-none">{{ $video->user->name }}</a></p>
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>

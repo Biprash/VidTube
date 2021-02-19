@@ -31,7 +31,7 @@
     <div id="app">
         @include('layouts.navbar')
         @if (session('message'))
-            <div class=" container alert alert-success my-2">
+            <div class=" container alert alert-success mt-4 mb-0">
                 {{ session('message') }}
             </div>
         @endif

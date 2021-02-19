@@ -10031,14 +10031,14 @@ svg:hover > path {
   padding-top: 20px;
 }
 
-.sidebar a {
+.sidebar > a {
   text-decoration: none;
   color: #ffffff;
   display: block;
   padding: 8px 8px 8px 16px;
 }
 
-.sidebar a:hover {
+.sidebar > a:hover {
   color: #ffa500;
   background-color: #808080;
 }

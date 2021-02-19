@@ -31,10 +31,10 @@
     <div id="app">
         @include('layouts.sidebar')
         <main class="admin-main">
-            @include('layouts.navbar')
+            @include('layouts.navbar', ['admin' => true])
             <div class="p-3">
                 @if (session('message'))
-                    <div class="alert alert-success my-2">
+                    <div class="alert alert-success mt-2">
                         {{ session('message') }}
                     </div>
                 @endif

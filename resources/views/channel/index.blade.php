@@ -11,13 +11,14 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($videos as $video)
+            {{-- @foreach ($array as $key=>$value) --}}
+            @foreach ($videos as $key=>$video)
                 <tr>
-                    <td>NaN</td>
+                    <td>{{ $key+1 }}</td>
                     <td>
                         <img src="{{ asset('storage/'.$video->thumbnail) }}" class="img-fluid thumbnail-table" alt="">
                     </td>
-                    <td><a href="{{ route('video.show', $video) }}">{{ $video->title }}</a></td>
+                    <td><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></td>
                     <td class="d-flex flex-row">
                         <a href="{{ route('video.edit', ['id' => $video->id]) }}" class="btn btn-warning mr-2">Edit</a>
                         <form action="{{ route('video.destroy', ['id' => $video->id]) }}" method="POST">

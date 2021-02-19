@@ -37,12 +37,12 @@
 
         @foreach ($videos as $video)
         <div class="col-6 col-md-4 col-lg-3 d-flex flex-column">
-            <a href="{{ route('video.show', $video) }}">
+            <a href="{{ route('video.show', $video) }}" class="text-decoration-none">
                 <img src="{{ asset('storage/'.$video->thumbnail) }}" style="height: 155px; width:100%;" alt="" class="img-fluid">
              </a>
             <div class="row py-3">
                 <div class="col-12 d-flex flex-column">
-                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}">{{ $video->title }}</a></h6>
+                    <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></h6>
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
