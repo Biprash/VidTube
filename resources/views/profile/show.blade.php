@@ -7,8 +7,8 @@
             <div class="card-header m-auto font-weight-bold border-bottom border-primary">About Me</div>
             <img src="{{ asset('storage/'.Auth::user()->image) }}" alt="" class="card-img-rop">
             <div class="card-body">
-                <h3>Danie Joe</h3>
-                <h5>dannyjoe@demo.com</h5>
+                <h3>{{ Auth::user()->name}}</h3>
+                <h5>{{ Auth::user()->email}}</h5>
             </div>
         </div>
     </div>

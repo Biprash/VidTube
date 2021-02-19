@@ -35,7 +35,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 // route prefix - prefix('video')
 // route name prefix - name('video.')
 Route::middleware(['auth', 'authorized_user'])->prefix('video')->name('video.')->group(function () {
-    Route::get('/channel/{id}', [VideoController::class, 'index'])->withoutMiddleware(['authorized_user'])->name('index');
+    Route::get('/channel/{id}', [VideoController::class, 'index'])->withoutMiddleware(['authorized_user', 'auth'])->name('index');
     Route::get('/create', [VideoController::class, 'create'])->withoutMiddleware(['authorized_user'])->name('create');
     Route::post('/store', [VideoController::class, 'store'])->withoutMiddleware(['authorized_user'])->name('store');
     Route::get('/{video}/show', [VideoController::class, 'show'])->withoutMiddleware(['authorized_user','auth'])->name('show');

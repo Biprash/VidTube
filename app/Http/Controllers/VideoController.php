@@ -18,11 +18,21 @@ class VideoController extends Controller
     public function index(Request $request, $user_id)
     {
         //
-        $user = $request->user();
-        $channel = User::findOrFail($user_id);
         $videos = Video::where('user_id', $user_id)->get();
-        $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
+        $channel = User::findOrFail($user_id);
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
+
+        if ($request->user() === null) {
+            $content = [
+                'videos' => $videos, 
+                'channel' => $channel, 
+                'subscriber_count' => $subscriber_count,
+            ];
+            return view('videos.index', $content);
+        }
+
+        $user = $request->user();
+        $subscribe = Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ]);
         $subscribe = $subscribe->first();
         // dd(Subscribe::where([ ['subscriber_user_id', '=', $user->id], ['subscribed_user_id', '=', $channel->id] ])->where('status', true)->count());
         if($subscribe == null) 

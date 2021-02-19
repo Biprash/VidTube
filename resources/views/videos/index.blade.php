@@ -16,11 +16,15 @@
             <form action="/subscribe/store/{{ $channel->id }}" method="post">
                 @csrf
                 <input type="hidden" name="like" value="like">
+                @if (empty($subscribe_status))
+                    <input type="submit" value="Subscribe" class="btn btn-primary w-100 text-white">
+                @else
                     @if (!$subscribe_status)            
                     <input type="submit" value="Subscribe" class="btn btn-primary w-100 text-white">
                     @else
                     <input type="submit" value="Unsubscribe" class="btn btn-info w-100">            
                     @endif     
+                @endif
             </form>
         </div>
     </div>
@@ -42,7 +46,7 @@
                     <div class="text-info">
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
-                        <span>{{ $video->created_at }}</span>
+                        <span id="SQL-date">{{ $video->created_at }}</span>
                     </div>
                 </div>
             </div>

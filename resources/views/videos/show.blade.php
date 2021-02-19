@@ -15,7 +15,7 @@
                 <div class="mr-auto pb-2">
                     <span>12M views</span>
                     <span class="font-weight-bolder">.</span>
-                    <span>{{ $video->created_at }}</span>
+                    <span id="SQL-date">{{ $video->created_at }}</span>
                 </div>
                 <div class="ml-auto d-flex">
                     <div class="border-bottom border-info d-flex">

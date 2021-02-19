@@ -21,7 +21,7 @@
                         <span>12M views</span>
                         <span class="font-weight-bolder">.</span>
                         {{-- <span>2 days ago</span> --}}
-                        <span>{{ $video->created_at }}</span>
+                        <span id="SQL-date">{{ $video->created_at }}</span>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,6 @@
     @endforeach --}}
 </div>
 @endsection
-
 
 
 
