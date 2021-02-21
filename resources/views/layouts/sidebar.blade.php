@@ -3,7 +3,7 @@
         {{ config('app.name', 'Laravel') }}
     </div> --}}
     <div>
-        <a class="py-4 m-0 d-flex justify-content-center navbar-brand" href="{{ url('/') }}">
+        <a class="py-4 m-0 d-flex justify-content-center navbar-brand text-primary" href="{{ url('/') }}">
             {{ config('app.name', 'VidTube') }}
             {{-- VidTube --}}
         </a>

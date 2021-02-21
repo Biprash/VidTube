@@ -32,7 +32,7 @@ class LikeController extends Controller
                 }
             }
             $like->save();
-            return redirect()->back()->with('message', 'Video LIKE STATUS has been updated');
+            return redirect()->back()->with('message', 'Video like status has been updated');
             
         } catch (ModelNotFoundException $e) {
             $like = new Like();
