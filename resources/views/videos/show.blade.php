@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+<script>
+    var thisIsYourIP = {{$ip}};
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12 col-lg-8">
@@ -159,7 +162,7 @@
                         <p class="m-0 text-info">{{ $video->user->name}}</p>
                     </a>
                     <div class="text-info">
-                        <span>12M views</span>
+                        <span>{{ $video->getTotalViews() }} views</span>
                         <span class="font-weight-bolder">.</span>
                         <span id="SQL-date">{{ $video->created_at }}</span>
                     </div>

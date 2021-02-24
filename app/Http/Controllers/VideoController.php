@@ -126,7 +126,8 @@ class VideoController extends Controller
                 'like_count' => $like_count,
                 'unlike_count' => $unlike_count,
                 'subscriber_count' => $subscriber_count,
-                'recommended' => $recommended
+                'recommended' => $recommended,
+                'ip' => request()->ip()
             ];
             return view('videos.show', $content);
         }
