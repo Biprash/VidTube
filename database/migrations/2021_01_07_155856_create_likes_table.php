@@ -23,7 +23,7 @@ class CreateLikesTable extends Migration
                 ->constrained()
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->char('status')->nullable();
+                $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }
