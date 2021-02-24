@@ -50,6 +50,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Like::class);
     }
+    
+    public function views()
+    {
+        return $this->hasMany(View::class);
+    }
 
     public function subscribeing()
     {

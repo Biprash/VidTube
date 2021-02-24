@@ -44,7 +44,7 @@
                 <div class="col-12 d-flex flex-column">
                     <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></h6>
                     <div class="text-info">
-                        <span>12M views</span>
+                        <span>{{ $video->getTotalViews() }} views</span>
                         <span class="font-weight-bolder">.</span>
                         <span id="SQL-date">{{ $video->created_at }}</span>
                     </div>

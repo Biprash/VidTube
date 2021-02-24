@@ -13,7 +13,7 @@
             <h2 class="my-3">{{ $video->title }}</h2>
             <div class="text-info border-bottom border-info d-flex">
                 <div class="mr-auto pb-2">
-                    <span>12M views</span>
+                    <span>{{ $video->getTotalViews() }} views</span>
                     <span class="font-weight-bolder">.</span>
                     <span id="SQL-date">{{ $video->created_at }}</span>
                 </div>

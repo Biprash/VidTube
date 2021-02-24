@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cookie;
+
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Video;
 use App\Models\Comment;
 use App\Models\Subscribe;
+use App\Models\View;
 
 class VideoController extends Controller
 {
@@ -93,6 +96,21 @@ class VideoController extends Controller
     public function show(Request $request, Video $video)
     {
         //
+        // dd(request()->getSession()->getId(), request()->session());
+        // dd('cookie',$request->cookie($video->id));
+        // dd('count', $video->getTotalViews());
+        if($request->cookie($video->id) === null) {
+            $videoView = new View();
+            $videoView->video_id = $video->id;
+            $videoView->ip = request()->ip();
+            $videoView->agent = request()->header('User-Agent');
+            $videoView->session_id = request()->getSession()->getId();
+            if ($request->user() !== null) {
+                $videoView->user_id = $request->user()->id;
+            }
+            $videoView->save();
+            Cookie::queue($video->id, 'kUfkflsfdTjsfsllEjldajjkaalRfk', 720);
+        }
         $channel = $video->user;
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
         $like_count = $video->likes()->where('status', true)->count();

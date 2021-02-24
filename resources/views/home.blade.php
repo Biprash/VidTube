@@ -18,7 +18,7 @@
                     <h6 class="mb-1 overflow-hidden text-truncate"><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></h6>
                     <p class="m-0 text-info"><a href="{{ route('video.index', ['id' => $video->user->id]) }}" class="text-decoration-none">{{ $video->user->name }}</a></p>
                     <div class="text-info">
-                        <span>12M views</span>
+                        <span>{{ $video->getTotalViews() }} views</span>
                         <span class="font-weight-bolder">.</span>
                         {{-- <span>2 days ago</span> --}}
                         <span id="SQL-date">{{ $video->created_at }}</span>
