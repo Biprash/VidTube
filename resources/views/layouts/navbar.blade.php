@@ -15,9 +15,21 @@
             <ul class="navbar-nav mr-auto">
 
             </ul>
-
+            <!-- Center of Navbar -->
             <ul class="navbar-nav m-auto">
-                
+                @if (empty($admin))            
+                    <form action="{{ route('home') }}" method="get" class="form-inline">
+                        <div class="input-group">
+                            <input type="text" name="search" placeholder="Search" class="form-control">
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-primary text-white">Search</button>
+                            </div>
+                          </div>
+                        </div>
+                        {{-- <input type="text" name="search" placeholder="Search" class="form-control">
+                        <button type="submit" class="btn btn-primary btn-small">Search</button> --}}
+                    </form>
+                @endif
             </ul>
 
             <!-- Right Side Of Navbar -->

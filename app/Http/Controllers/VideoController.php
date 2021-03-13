@@ -21,7 +21,7 @@ class VideoController extends Controller
     public function index(Request $request, $user_id)
     {
         //
-        $videos = Video::where('user_id', $user_id)->get();
+        $videos = Video::where('user_id', $user_id)->paginate(config('constants.paginate'));
         $channel = User::findOrFail($user_id);
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
 
@@ -115,7 +115,7 @@ class VideoController extends Controller
         $subscriber_count = Subscribe::where([ ['status', '=', true], ['subscribed_user_id', '=', $channel->id] ])->count();
         $like_count = $video->likes()->where('status', true)->count();
         $unlike_count = $video->likes()->where('status', false)->count();
-        $recommended = Video::whereNotIn('id', [$video->id])->limit(5)->get();
+        $recommended = Video::whereNotIn('id', [$video->id])->limit(10)->get();
         $comments = $video->comments;
 
         if($request->user() === null) {
@@ -127,7 +127,6 @@ class VideoController extends Controller
                 'unlike_count' => $unlike_count,
                 'subscriber_count' => $subscriber_count,
                 'recommended' => $recommended,
-                'ip' => request()->ip()
             ];
             return view('videos.show', $content);
         }

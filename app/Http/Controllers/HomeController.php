@@ -22,9 +22,21 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-        $videos = Video::all();
+        // dd($request);
+        $search = $request->search;
+        $videos = Video::when($search, function ($query, $search) {
+            return $query
+                ->where('title', 'LIKE', "%{$search}%")->limit(config('constants.paginate'))->get(); 
+                // ->orWhere('description', 'LIKE', "%{$search}%") 
+        })
+        ->when(!$search, function ($query, $search) {
+            return $query
+                ->paginate(config('constants.paginate')); 
+                // ->orWhere('description', 'LIKE', "%{$search}%") 
+        });
+        // dd($videos);
         return view('home', ['videos' => $videos]);
     }
 }

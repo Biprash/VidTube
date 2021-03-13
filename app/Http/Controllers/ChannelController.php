@@ -15,7 +15,7 @@ class ChannelController extends Controller
 
     public function index(Request $request) {
         $user = $request->user();
-        $videos = Video::where('user_id', $user->id)->get();
+        $videos = Video::where('user_id', $user->id)->paginate(config('constants.paginate'));
         $content = [
             'videos' => $videos
         ];

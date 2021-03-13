@@ -78,5 +78,14 @@
         </div>
     </div>
     @endforeach --}}
+    @if ( count($videos) == 0 )
+        <h4 class="py-4">No data found</h4>
+    @endif
+
+    <div class="row justify-content-center my-4">
+        <div class="col-3">
+            {{ $videos->links() }}
+        </div>
+    </div>
 </div>
 @endsection

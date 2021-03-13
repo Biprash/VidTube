@@ -78,6 +78,10 @@ svg:hover > path {
     width: 100%;
 }
 
+.page-link {
+    color: $secondary;
+}
+
 @media only screen and (max-width: 800px) {
     .subscribed-avatar {
         width: 80px;

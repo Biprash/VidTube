@@ -29,6 +29,19 @@
                     </td>
                 </tr>
             @endforeach
+
+            @if ( count($videos) == 0 )
+                <tr>
+                    <td></td>
+                    <td style="text-align: center">No data found</td>
+                </tr>
+            @endif
         </tbody>
     </table>
+
+    <div class="row justify-content-center my-4">
+        <div class="col-3">
+            {{ $videos->links() }}
+        </div>
+    </div>
 @endsection

@@ -8,7 +8,7 @@ dateParse();
 
 function dateParse() {
     let sqlDate = document.querySelectorAll('#SQL-date');
-    console.log(sqlDate);
+    // console.log(sqlDate);
     sqlDate.forEach(element => {
         let date = element.innerHTML
         // console.log('date :', date);

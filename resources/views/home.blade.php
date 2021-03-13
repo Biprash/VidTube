@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @if (request()->get('search'))
+        <h5 class="mb-3">Search result for '{{ request()->get('search') }}'</h5>
+    @endif
     <div class="row">
         @foreach ($videos as $video)
         <div class="col-6 col-md-4 col-lg-3 d-flex flex-column">
@@ -41,6 +44,16 @@
             </div>
         </div>
     @endforeach --}}
+    @if ( count($videos) == 0 )
+        <h4 class="py-4">No data found</h4>
+    @endif
+    @if (method_exists($videos, 'links'))    
+        <div class="row justify-content-center my-4">
+            <div class="col-3">
+                {{ $videos->links() }}
+            </div>
+        </div>
+    @endif
 </div>
 @endsection
 

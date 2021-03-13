@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
@@ -30,7 +31,7 @@ Auth::routes();
 Route::get('change-password', [ChangePasswordController::class, 'index'])->name('change.password');
 Route::post('change-password', [ChangePasswordController::class, 'store'])->name('change.password.store');
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // route prefix - prefix('video')
 // route name prefix - name('video.')
