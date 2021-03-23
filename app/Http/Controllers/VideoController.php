@@ -13,6 +13,11 @@ use App\Models\View;
 
 class VideoController extends Controller
 {
+    // public function __construct()
+    // {
+    //     $this->middleware('auth')->except('index', 'show');
+    // }
+    
     /**
      * Display a listing of the resource.
      *
@@ -75,7 +80,6 @@ class VideoController extends Controller
     public function store(Request $request)
     {
         //
-        // dd($request);
         $video = new Video();
         $video->user_id = $request->user()->id;
         $video->title = request('title');
@@ -169,10 +173,12 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, Video $video)
     {
         //
-        $video = Video::findOrFail($id);
+        if ($request->user()->cannot('update', $video)) {
+            abort(403);
+        }
         return view('videos.edit', ['video' => $video]);
     }
 
@@ -183,10 +189,12 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Video $video)
     {
         //
-        $video = Video::findOrFail($id);
+        if ($request->user()->cannot('update', $video)) {
+            abort(403);
+        }
         $video->title = request('title');
         $video->description = request('description');
         $video->save();
@@ -199,11 +207,13 @@ class VideoController extends Controller
      * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Video $video)
     {
         //
-        $video = Video::findOrFail($id);
-        $video->destroy();
+        if ($request->user()->cannot('delete', $video)) {
+            abort(403);
+        }
+        $video->delete();
         return redirect()->route('home')->with('message', 'Video has been deleated');
     }
 }

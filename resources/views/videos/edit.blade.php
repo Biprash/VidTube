@@ -8,9 +8,9 @@
                 <div class="card-header m-auto font-weight-bold border-bottom border-primary">Edit Post</div>
 
                 <div class="card-body">
-                    <form action="{{route('video.update', ['id' => $video->id])}}" enctype="multipart/form-data" method="POST">
+                    <form action="{{route('video.update', $video)}}" enctype="multipart/form-data" method="POST">
                         @csrf
-
+                        @method('PUT')
                         {{-- <input type="hidden" name="token" value="{{ $token }}"> --}}
 
                         <div class="form-group row">

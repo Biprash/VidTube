@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\Auth\ChangePasswordController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\CommentController;
@@ -33,16 +34,20 @@ Route::post('change-password', [ChangePasswordController::class, 'store'])->name
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::middleware('auth')->group(function () {
+    Route::resource('users', UserController::class)->middleware('role:admin')->except('show');
+});
+
 // route prefix - prefix('video')
 // route name prefix - name('video.')
-Route::middleware(['auth', 'authorized_user'])->prefix('video')->name('video.')->group(function () {
-    Route::get('/channel/{id}', [VideoController::class, 'index'])->withoutMiddleware(['authorized_user', 'auth'])->name('index');
-    Route::get('/create', [VideoController::class, 'create'])->withoutMiddleware(['authorized_user'])->name('create');
-    Route::post('/store', [VideoController::class, 'store'])->withoutMiddleware(['authorized_user'])->name('store');
-    Route::get('/{video}/show', [VideoController::class, 'show'])->withoutMiddleware(['authorized_user','auth'])->name('show');
-    Route::get('/{id}/edit', [VideoController::class, 'edit'])->name('edit');
-    Route::put('/{id}/update', [VideoController::class, 'update'])->name('update');
-    Route::delete('/{id}/destroy', [VideoController::class, 'destroy'])->name('destroy');
+Route::middleware(['auth'])->prefix('video')->name('video.')->group(function () {
+    Route::get('/channel/{id}', [VideoController::class, 'index'])->withoutMiddleware(['auth'])->name('index');
+    Route::get('/create', [VideoController::class, 'create'])->name('create');
+    Route::post('/store', [VideoController::class, 'store'])->name('store');
+    Route::get('/{video}/show', [VideoController::class, 'show'])->withoutMiddleware(['auth'])->name('show');
+    Route::get('/{video}/edit', [VideoController::class, 'edit'])->name('edit');
+    Route::put('/{video}/update', [VideoController::class, 'update'])->name('update');
+    Route::delete('/{video}/destroy', [VideoController::class, 'destroy'])->name('destroy');
 });
 
 

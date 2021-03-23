@@ -20,8 +20,8 @@
                     </td>
                     <td><a href="{{ route('video.show', $video) }}" class="text-decoration-none">{{ $video->title }}</a></td>
                     <td class="d-flex flex-row">
-                        <a href="{{ route('video.edit', ['id' => $video->id]) }}" class="btn btn-warning mr-2">Edit</a>
-                        <form action="{{ route('video.destroy', ['id' => $video->id]) }}" method="POST">
+                        <a href="{{ route('video.edit', $video) }}" class="btn btn-warning mr-2">Edit</a>
+                        <form action="{{ route('video.destroy', $video) }}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Remove</button>

@@ -66,4 +66,44 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'subscribes', 'subscribed_user_id', 'subscriber_user_id');
     }
 
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class, 'users_roles');
+    }
+
+    // methods
+
+    // public function hasRole( ... $roles ) {
+
+    //     foreach ($roles as $role) {
+    //       if ($this->roles->contains('name', $role)) {
+    //         return true;
+    //       }
+    //     }
+    //     return false;
+    // }
+
+    // public function hasAnyRoles($roles){
+    //     if($this->roles()->whereIn('name',$roles)->first()){
+    //         return true;
+    //     }
+    //     return false;
+    // }
+
+    public function hasRole($role){
+        // dd($this->roles()->where('name',$role)->first());
+        if($this->roles()->where('name',$role)->first()){
+            
+            return true;
+        }
+        return false;
+    }
+    
+    public function isAdmin(){
+        if($this->roles()->where('name', 'Admin')->first()){
+            
+            return true;
+        }
+        return false;
+    }
 }
