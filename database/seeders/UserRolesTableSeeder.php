@@ -20,7 +20,7 @@ class UserRolesTableSeeder extends Seeder
         DB::table('users_roles')->insert(array(
             [
                 'user_id' => User::first()->id,
-                'role_id' => Role::where('name','admin')->first()->id,
+                'role_id' => Role::where('name','Admin')->first()->id,
                 'created_at' => '2020-05-29 12:46:45',
                 'updated_at' => '2020-05-29 12:46:45',
             ]
