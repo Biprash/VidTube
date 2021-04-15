@@ -95,6 +95,9 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+        if ($request->user()->cannot('update', $video)) {
+            abort(403);
+        }
         // it should be soft deleated
         abort(403);
     }
